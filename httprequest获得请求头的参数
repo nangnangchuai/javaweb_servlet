@@ -1,0 +1,35 @@
+public class HeaderServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		//1、获得指定的头
+		String header = request.getHeader("User-Agent");
+		System.out.println(header);
+   // 显示输出指定的头：Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0
+
+  
+		//2、获得所有的头的名称
+    //*******************显示结果************
+    获得所有的头的名称localhost:8080
+    获得所有的头的名称Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:63.0) Gecko/20100101 Firefox/63.0
+    获得所有的头的名称text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+    获得所有的头的名称zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2
+    获得所有的头的名称gzip, deflate
+    获得所有的头的名称keep-alive
+    获得所有的头的名称1
+    获得所有的头的名称max-age=0  
+    //*******************显示结果结束************ 
+		Enumeration<String> headerNames = request.getHeaderNames();
+		while(headerNames.hasMoreElements()){
+			String headerName = headerNames.nextElement();
+			String headerValue = request.getHeader(headerName);
+			System.out.println(headerName+":"+headerValue);
+		}
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
