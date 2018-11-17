@@ -1,0 +1,24 @@
+public class TextServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		//1.设置response查询的码表,否则服务器查找的编码是ios-99...
+		//response.setCharacterEncoding("UTF-8");
+		
+		//2.通过一个头 Content-Type 告知客户端（浏览器）使用UTF-8码表来显示
+		//response.setHeader("Content-Type", "text/html;charset=UTF-8");
+		//这个方法封装了1和2
+		response.setContentType("text/html;charset=UTF-8");
+		
+		PrintWriter writer = response.getWriter();
+		//writer.write("hello response!!!");
+		writer.write("你好");
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
