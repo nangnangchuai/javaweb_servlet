@@ -1,0 +1,31 @@
+public class ByteServlet extends HttpServlet {
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		
+		//使用response获得字节输出流
+		ServletOutputStream out = response.getOutputStream();
+		
+		//获得服务器上的图片,这里的图片的路径是相当webcontent的路径
+		String realPath = this.getServletContext().getRealPath("a.jpg");
+		//读取图片的内容
+    InputStream in = new FileInputStream(realPath);
+		
+		int len = 0;
+    //每次往缓冲区里面放入1024个字节
+		byte[] buffer = new byte[1024];
+		while((len=in.read(buffer))>0){
+    //out.write(buffer, 0, len);这里是设置输出的时候，防止最后一个不够1024就直接输出了
+			out.write(buffer, 0, len);
+		}
+		
+		in.close();
+		out.close();
+		
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+		doGet(request, response);
+	}
+}
