@@ -1,10 +1,16 @@
 //*******************servlet1的代码
+/*
+请求转发是在服务器内部自己实现的。当客户端访问servlet1的时候，servlet1将请求转发给servlet2
+在servlet1中可以使用setsetAttribute定义传送给servlet2的值
+在servlet2中可以使用getsetAttribute定义传送给自己的值
+*/
 public class Servlet1 extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		
 		//想request域中存储数据
+		//发送请求
 		request.setAttribute("name", "tom");
 		
 	
@@ -29,6 +35,7 @@ public class Servlet2 extends HttpServlet {
 			throws ServletException, IOException {
 		
 		//从request域中取出数据
+		//解析request请求
 		Object attribute = request.getAttribute("name");
 		//servlet2向浏览器中输出的内容
 		response.getWriter().write("hello haohao..."+attribute);
